@@ -20,7 +20,8 @@
   
 * [**Les States**](##Les-States)
   * [**Conditional Rendering**](##Conditional-Rendering)
-  * [**Destructuring Arrays and Objects**](##Destructuring-Arrays-and-Objects)
+  * [**useState**](##useState)
+  * [**useEffect**](##useEffect)
 
 * [**Getting Started with Create React App**](##Getting-Started-with-Create-React-App)
 
@@ -69,7 +70,7 @@ npm start
 
 &nbsp;
 
-#### La structure du projet sera la suivante :
+#### La structure du projet sera la suivante
 
 ![Structure](md/structure.png "structure dossier")
 
@@ -557,7 +558,97 @@ export default App;
 
 &nbsp;
 
-### Destructuring Arrays and Objects
+### useState
+
+Pour utiliser le `useState`, on commence par l'importer depuis `React`
+
+````js
+// App.js
+
+import React, {useState} from 'react';
+````
+
+&nbsp;
+
+Le `UseState` nous retourne 2 éléments :
+
+* Le `State` ***value***
+
+* Une `fonction` qui va mettre à jour la ***value***
+
+&nbsp;
+
+Dans l'exemple suivant, on destructure un tableau pour changer dynamiquement la value :
+
+````js
+// App.js
+
+import './App.css';
+import React, {useState} from 'react';
+
+function App() {
+
+const [first, changeFirst] = useState('in a Good Mood!')
+console.log(first);
+
+  return (
+    <>
+      <h1>Today, i am {first}</h1>
+      <button onClick={() => {changeFirst("in Happy Mood")}} >change Mood to Happy</button>
+      <button onClick={() => {changeFirst("in Sad Mood")}} >change Mood to Sad</button>
+      <button onClick={() => {changeFirst("in Bad Mood")}} >change Mood to Bad</button>
+    </>
+  )
+}
+
+export default App;
+
+````
+
+&nbsp;
+
+---
+
+&nbsp;
+
+### useEffect
+
+````js
+// App.js
+
+import './App.css';
+import React, {useState, useEffect} from 'react';
+
+function App() {
+
+const [first, changeFirst] = useState('in a Good Mood')
+
+const [secondary, changeSecondary] = useState('Nice')
+
+useEffect(() => {
+  console.log(`We are ${first} today!`)
+}, [first])
+
+useEffect(() => {
+  console.log(`It's ${secondary} here!`)
+}, [secondary])
+
+  return (
+    <>
+      <h1>Today, i am {first}</h1>
+      <button onClick={() => {changeFirst("in Happy Mood")}} >change Mood to Happy</button>
+      <button onClick={() => {changeFirst("in Sad Mood")}} >change Mood to Sad</button>
+      <button onClick={() => {changeFirst("in Bad Mood")}} >change Mood to Bad</button>
+      <button onClick={() => {changeSecondary('Awesome')}} >change day to awesome</button>
+      <button onClick={() => {changeSecondary('Great')}} >change day to great</button>
+    </>
+  )
+}
+
+export default App;
+
+
+````
 
 &nbsp;
 
