@@ -17,6 +17,10 @@
   * [**Display images**](###Display-Images)
   * [**Fragments**](###Fragments)
   * [**Css**](###Css)
+  
+* [**Les States**](##Les-States)
+  * [**Conditional Rendering**](##Conditional-Rendering)
+  * [**Destructuring Arrays and Objects**](##Destructuring-Arrays-and-Objects)
 
 * [**Getting Started with Create React App**](##Getting-Started-with-Create-React-App)
 
@@ -490,6 +494,70 @@ function Header(props) {
 export default App;
 
 ````
+
+&nbsp;
+
+---
+
+&nbsp;
+
+## Les States
+
+### Conditional Rendering
+
+````js
+// index.js
+
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import './index.css';
+import App from './App';
+
+const root = ReactDOM.createRoot(document.getElementById('root'));
+root.render(
+    <>
+    {/* Si true alors on affiche SecretComponent, si false RegularComponent */}
+        <App authorized={false}/>
+    </>
+);
+````
+
+````js
+// App.js
+
+import './App.css';
+
+function SecretComponent() {
+  return (
+    <h1>Informations pour utilisateur autorisé uniquement</h1>
+  )
+}
+
+function RegularComponent() {
+  return (
+    <h1>Informations disponibles pour tous</h1>
+  )
+}
+
+function App(props) {
+  return (
+    <>
+      {props.authorized ? <SecretComponent /> : <RegularComponent />}
+    </>
+  )
+}
+
+export default App;
+
+````
+
+&nbsp;
+
+---
+
+&nbsp;
+
+### Destructuring Arrays and Objects
 
 &nbsp;
 
