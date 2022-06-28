@@ -22,6 +22,7 @@
   * [**Conditional Rendering**](##Conditional-Rendering)
   * [**useState**](##useState)
   * [**useEffect**](##useEffect)
+  * [**useReducer**](##useReducer)
 
 * [**Getting Started with Create React App**](##Getting-Started-with-Create-React-App)
 
@@ -646,8 +647,67 @@ useEffect(() => {
 }
 
 export default App;
+````
 
+&nbsp;
 
+---
+
+&nbsp;
+
+### useReducer
+
+Sans le `useReducer` :
+
+````js
+// App.js
+
+import './App.css';
+import React, {useState} from 'react';
+
+function App() {
+
+  const [checked, setChecked] = useState(false)
+
+  return (
+    <>
+      <input type='checkbox' value={checked} onChange={
+        () => setChecked((checked) => !checked)
+      } />
+      <p>{checked ? 'checked' : 'not checked'}</p>
+    </>
+  )
+}
+
+export default App;
+````
+
+&nbsp;
+
+Avec le `useReducer` :
+
+````js
+// App.js
+
+import './App.css';
+import React, { useReducer } from 'react';
+
+function App() {
+
+  const [checked, toggle] = useReducer(
+    (checked) => !checked,
+    false
+  )
+
+  return (
+    <>
+      <input type='checkbox' value={checked} onChange={toggle} />
+      <p>{checked ? 'checked' : 'not checked'}</p>
+    </>
+  )
+}
+
+export default App;
 ````
 
 &nbsp;
