@@ -13,6 +13,10 @@
   * [**Single Components**](###Single-Components)
   * [**Dynamic Data**](###Dynamic-Data)
   * [**Working with Lists**](###Working-with-Lists)
+  * [**Adding keys to Lists**](###Adding-keys-to-Lists)
+  * [**Display images**](###Display-Images)
+  * [**Fragments**](###Fragments)
+  * [**Css**](###Css)
 
 * [**Getting Started with Create React App**](##Getting-Started-with-Create-React-App)
 
@@ -63,7 +67,7 @@ npm start
 
 #### La structure du projet sera la suivante :
 
-![Structure](./md/structure.png)
+![Structure](md/structure.png "structure dossier")
 
 &nbsp;
 
@@ -296,6 +300,193 @@ function App() {
   );
 }
 
+export default App;
+
+````
+
+&nbsp;
+
+---
+
+&nbsp;
+
+### Adding keys to Lists
+
+React nécéssite que chaque donnée dynamique soit soit doté de son propre `id`.
+On va donc placé nos données das un `object` et passé les données en `props` :
+
+````js
+// App.js
+
+import './App.css';
+
+function Header(props) {
+
+  return (
+    <header>
+      <h1>{props.name}</h1>
+    </header>
+  )
+}
+
+function Main(props) {
+  return (
+    <header>
+      <p>Création d'un élément{props.adjectives}</p>
+      <ul>
+      <!-- 3. On affects les props -->
+        {props.formations.map((formation) => (<li key={formation.id}>{formation.title}</li>))}
+      </ul>
+    </header>
+  )
+}
+
+function Footer(props) {
+  return (
+    <header>
+      <p>Copyright &copy; {props.year}</p>
+    </header>
+  )
+}
+
+const formations = [
+  "Installation",
+  "Components",
+  "Dynamic Data",
+  "React Create App"
+]
+
+// 1. On créer un object qui va boucler dans le tableau formations & auquel on bind les données a des clés.
+const formationsObjects = formations.map((formation, formation_id) => (
+  {
+    id: formation_id,
+    title: formation
+  }
+))
+
+console.log(formationsObjects);
+
+
+// 2. On passe l'object en props
+function App() {
+  return (
+    <div className="App">
+      <Header name='Mon application React' />
+      <Main adjectives=' - Cours : ' formations={formationsObjects} />
+      <Footer year={new Date().getFullYear()} />
+    </div>
+  );
+}
+
+export default App;
+
+````
+
+&nbsp;
+
+---
+
+&nbsp;
+
+### Display images
+
+Les images stocker localement doivent être importer :
+
+````js
+// App.js
+
+import './App.css';
+import img from './images/formations.jpg'
+
+...
+
+function Main(props) {
+  return (
+    <header>
+      <p>Création d'un élément{props.adjectives}</p>
+      <img src={img} alt={'formation'} height={200} />
+      <img src='https://avatars.githubusercontent.com/u/39912616?v=4' alt='github_photo' height={200} />
+      <ul>
+        {props.formations.map((formation) => (<li key={formation.id}>{formation.title}</li>))}
+      </ul>
+    </header>
+  )
+}
+...
+
+export default App;
+````
+
+&nbsp;
+
+---
+
+&nbsp;
+
+### Fragments
+
+Avec `React`, on ne peut pas avoir dans les `composants` **plusieurs balises au même niveau**.
+
+Ici `<App />` et le `<AppTwo />` sont au même niveau d'imbrication ce qui provoque une erreur de syntaxe.
+
+*Pour remédier à ce problème il suffit de les imbriquer dans une `div`.*
+
+**Cependant pour éviter de polluer le code de balise inutile, `React` propose un composent appelé `Fragment`.**
+
+Il suffit d'englober notre code de la balise React suivante :
+
+* `<React.Fragment>...</React.Fragment>` ou sa syntaxe courte `<>...</>`
+
+````js
+// index.js
+
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import './index.css';
+import App from './App';
+
+function AppTwo() {
+    return (
+        <h1>Voiçi une seconde App</h1>
+    )
+}
+
+const root = ReactDOM.createRoot(document.getElementById('root'));
+root.render(
+    <>
+        <App />
+        <AppTwo />
+    </>
+);
+````
+
+&nbsp;
+
+---
+
+&nbsp;
+
+### Css
+
+Le `css` fonctionne dans `React` comme en `html`.
+
+Cependant pour définir une `class`, il faut le nommée `className` et `importer` le fichier dans le composent qui sollicite la feuille de style `css` :
+
+````js
+// App.js
+
+import './App.css';
+import img from './images/formations.jpg'
+
+function Header(props) {
+
+  return (
+    <header className='header-styles'>
+      <h1>{props.name}</h1>
+    </header>
+  )
+}
+...
 export default App;
 
 ````
