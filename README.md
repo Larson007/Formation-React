@@ -11,6 +11,7 @@
 
 * [**Components**](##Components)
   * [**Single Components**](##Single-Components)
+  * [**Dynamic Data**](##Dynamic-Data)
 
 * [**Getting Started with Create React App**](##Getting-Started-with-Create-React-App)
 
@@ -57,6 +58,7 @@ npx create-react-app my-app
 cd my-app
 npm start
 ````
+
 &nbsp;
 
 #### La structure du projet sera la suivante :
@@ -172,6 +174,62 @@ function App() {
       <Header />
       <Main />
       <Footer />
+    </div>
+  );
+}
+
+export default App;
+
+````
+
+&nbsp;
+
+---
+
+&nbsp;
+
+## Dynamic Data
+
+On va utiliser des `props` qui est un `object` en params de nos fonctions :
+
+````js
+// App.js
+
+import './App.css';
+
+function Header(props) {
+
+  console.log(props);
+
+  return (
+    <header>
+      <h1>{props.name}</h1>
+    </header>
+  )
+}
+
+function Main(props) {
+  return (
+    <header>
+      <p>création d'un élément{props.adjectives}</p>
+    </header>
+  )
+}
+
+function Footer(props) {
+  return (
+    <header>
+      <p>Copyright &copy; {props.year}</p>
+    </header>
+  )
+}
+
+function App() {
+  return (
+    <div className="App">
+      <Header name='Mon application React'/>
+      <Main adjectives=' : dynamic data'/>
+      <Footer year={new Date().getFullYear()} />
     </div>
   );
 }

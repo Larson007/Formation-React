@@ -1,36 +1,38 @@
 import './App.css';
 
-function Header() {
+function Header(props) {
+
+  console.log(props);
+
   return (
     <header>
-      <h1>Mon application React</h1>
+      <h1>{props.name}</h1>
     </header>
   )
 }
 
-function Main() {
+function Main(props) {
   return (
     <header>
-      <p>création d'un élément</p>
+      <p>création d'un élément{props.adjectives}</p>
     </header>
   )
 }
 
-function Footer() {
+function Footer(props) {
   return (
     <header>
-      <p>Copyright &copy; 2022</p>
+      <p>Copyright &copy; {props.year}</p>
     </header>
   )
 }
-
 
 function App() {
   return (
     <div className="App">
-      <Header />
-      <Main />
-      <Footer />
+      <Header name='Mon application React'/>
+      <Main adjectives=' : dynamic data'/>
+      <Footer year={new Date().getFullYear()} />
     </div>
   );
 }
