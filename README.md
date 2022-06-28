@@ -9,12 +9,12 @@
 
 * [**Installation**](##Installation)
 
-* [**Components**](##Components)
-  * [**Single Components**](##Single-Components)
-  * [**Dynamic Data**](##Dynamic-Data)
+* [**Syntaxe**](##Syntaxe)
+  * [**Single Components**](###Single-Components)
+  * [**Dynamic Data**](###Dynamic-Data)
+  * [**Working with Lists**](###Working-with-Lists)
 
 * [**Getting Started with Create React App**](##Getting-Started-with-Create-React-App)
-
 
 &nbsp;
 
@@ -63,7 +63,7 @@ npm start
 
 #### La structure du projet sera la suivante :
 
-![Structure](md/structure.png)
+![Structure](./md/structure.png)
 
 &nbsp;
 
@@ -120,7 +120,7 @@ npm install popper.js --save
 
 &nbsp;
 
-## Components
+## Syntaxe
 
 ### Single Components
 
@@ -188,7 +188,7 @@ export default App;
 
 &nbsp;
 
-## Dynamic Data
+### Dynamic Data
 
 On va utiliser des `props` qui est un `object` en params de nos fonctions :
 
@@ -229,6 +229,68 @@ function App() {
     <div className="App">
       <Header name='Mon application React'/>
       <Main adjectives=' : dynamic data'/>
+      <Footer year={new Date().getFullYear()} />
+    </div>
+  );
+}
+
+export default App;
+
+````
+
+&nbsp;
+
+---
+
+&nbsp;
+
+### Working with Lists
+
+````js
+// App.js
+
+import './App.css';
+
+function Header(props) {
+
+  return (
+    <header>
+      <h1>{props.name}</h1>
+    </header>
+  )
+}
+
+function Main(props) {
+  return (
+    <header>
+      <p>Création d'un élément{props.adjectives}</p>
+      <ul>
+        {props.formations.map((formation) => (<li>{formation}</li>))}
+      </ul>
+    </header>
+  )
+}
+
+function Footer(props) {
+  return (
+    <header>
+      <p>Copyright &copy; {props.year}</p>
+    </header>
+  )
+}
+
+const formations = [
+  "Installation",
+  "Components",
+  "Dynamic Data",
+  "React Create App"
+]
+
+function App() {
+  return (
+    <div className="App">
+      <Header name='Mon application React'/>
+      <Main adjectives=' - Cours : ' formations={formations}/>
       <Footer year={new Date().getFullYear()} />
     </div>
   );
